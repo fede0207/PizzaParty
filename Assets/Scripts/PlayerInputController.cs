@@ -12,7 +12,7 @@ public class PlayerInputController : MonoBehaviour
             return;
         }
         //ottieni player umano supponendo sia il primo della lista
-        Player humanPlayer = draftSystem.players[0];
+        Player humanPlayer = draftSystem.players[0].playerData;
 
         if(!humanPlayer.Hand.Contains(cardToPass))
         {
@@ -24,7 +24,7 @@ public class PlayerInputController : MonoBehaviour
 
         //trova il giocatore successivo
         int nextPlayerIndex = (0 + 1) % draftSystem.players.Count;
-        Player nextPlayer = draftSystem.players[nextPlayerIndex];
+        Player nextPlayer = draftSystem.players[nextPlayerIndex].playerData;
 
         nextPlayer.Hand.Add(cardToPass);//aggiunge la carta nella mano del giocatore successivo
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DraftSystem : MonoBehaviour
 {
-    public List<Player> players;
+    public List<PlayerMono> players;
     public DeckManager deck;
     public PlayerHandManager playerHandManager;
 
@@ -13,20 +13,20 @@ public class DraftSystem : MonoBehaviour
 
     public void StartDraft()
     {
-        foreach (Player player in players) //libera la mano e le carte utilizzate di ogni giocatore
+        foreach (PlayerMono player in players) //libera la mano e le carte utilizzate di ogni giocatore
         {
-            player.Hand.Clear();
-            player.Collection.Clear();
+            player.playerData.Hand.Clear();
+            player.playerData.Collection.Clear();
         }
 
-        foreach (Player player in players) //distribuisce cinque carte per giocatore
+        foreach (PlayerMono player in players) //distribuisce cinque carte per giocatore
         {
             for (int i = 0; i < 5; i++)
             {
                 Card drawnCard = deck.DrawCard();
                 if (drawnCard != null)
                 {
-                    player.Hand.Add(drawnCard);
+                    player.playerData.Hand.Add(drawnCard);
                     Debug.Log($"Carta distribuita a {player}: {drawnCard.cardName}");
                 }
             }
@@ -35,29 +35,29 @@ public class DraftSystem : MonoBehaviour
 
     public void NextTurn()
     {
-        foreach (Player player in players) //ogni giocatore pesca una carta
+        foreach (PlayerMono player in players) //ogni giocatore pesca una carta
         {
             for (int i = 0; i < 5; i++)
             {
                 Card drawnCard = deck.DrawCard();
                 if (drawnCard != null)
                 {
-                    player.Hand.Add(drawnCard);
+                    player.playerData.Hand.Add(drawnCard);
                     Debug.Log($"Carta distribuita a {player}: {drawnCard.cardName}");
                 }
             }
         }
 
         // Configura la mano del giocatore umano
-        Player humanPlayer = players[0];
+        Player humanPlayer = players[0].playerData;
         Debug.Log($"Mano del giocatore umano: {string.Join(", ", humanPlayer.Hand.Select(c => c.cardName))}");
         playerHandManager.SetupPlayerHand(humanPlayer.Hand);
 
         //ogni giocatore sceglie una carta da passare
         for (int i = 0; i < players.Count; i++)
         {
-            Player currentPlayer = players[i];
-            Player nextPlayer = players[(i + 1) % players.Count];
+            Player currentPlayer = players[i].playerData;
+            Player nextPlayer = players[(i + 1) % players.Count].playerData;
 
             Card cardToPass = currentPlayer.SelectCard();
             if (cardToPass != null)
@@ -77,5 +77,11 @@ public class DraftSystem : MonoBehaviour
         }
 
         currentPlayerIndex = (currentPlayerIndex + 1) % players.Count;
+    }
+
+    void Start()
+    {
+        StartDraft();
+        NextTurn();
     }
 }

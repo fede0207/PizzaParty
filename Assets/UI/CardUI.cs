@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -58,5 +59,14 @@ public class CardUI : MonoBehaviour
         }
 
 
+    }
+
+    private Sprite GetCardSpriteTest(Card.CardType type)
+    {
+        // Sostituisci con un colore solido per test
+        Texture2D tex = new Texture2D(256, 256);
+        tex.SetPixels32(Enumerable.Repeat(new Color32(255, 0, 0, 255), 256 * 256).ToArray());
+        tex.Apply();
+        return Sprite.Create(tex, new Rect(0, 0, 256, 256), Vector2.zero);
     }
 }
