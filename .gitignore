@@ -1,0 +1,61 @@
+# ========================================== #
+# Unity - File e cartelle generati automaticamente
+# ========================================== #
+/[Ll]ibrary/
+/[Tt]emp/
+/[Oo]bj/
+/[Bb]uild/
+/[Bb]uilds/
+/[Ll]ogs/
+/[Uu]ser[Ss]ettings/
+/[Mm]emoryCaptures/
+/.vs/
+/.vscode/
+/ProjectSettings/UserSettings.asset
+
+# ========================================== #
+# File di progetto e IDE
+# ========================================== #
+*.csproj
+*.unityproj
+*.sln
+*.suo
+*.user
+*.userprefs
+*.pidb
+*.pdb
+*.opendb
+*.VC.db
+
+# ========================================== #
+# File binari e asset pesanti
+# ========================================== #
+*.dll
+*.a
+*.so
+*.bundle
+*.exe
+*.apk
+*.aab
+*.unitypackage
+
+# ========================================== #
+# File temporanei e OS-specific
+# ========================================== #
+*.pidb.meta
+*.pdb.meta
+*.DS_Store
+Thumbs.db
+__MACOSX/
+
+# ========================================== #
+# File di pacchetti Unity (se non usati)
+# ========================================== #
+/[Pp]ackages/
+!/[Pp]ackages/manifest.json
+!/[Pp]ackages/packages-lock.json
+
+# ========================================== #
+# File di cache Burst (causa problemi di dimensioni)
+# ========================================== #
+**/PackageCache/com.unity.burst/
